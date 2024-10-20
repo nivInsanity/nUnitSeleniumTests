@@ -1,0 +1,92 @@
+﻿# .NET Core
+project.lock.json
+project.fragment.lock.json
+*.nuspec
+*.nupkg
+*.snupkg
+
+# Visual Studio
+.vs/
+*.sln.ide
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm][sS]/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.log
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Rider
+.idea/
+
+# Selenium WebDriver files
+*.chromedriver
+chromedriver.exe
+
+# Visual Studio Code
+.vscode/
+
+# NuGet packages
+*.nupkg
+**/packages/*
+**/project.lock.json
+
+# Backup files
+*~
+*.bak
+*.tmp
+*.temp
+*.swp
+*.swm
+
+# Environment files
+.env
+.env.*.local
+
+# Ignore all user-specific files
+*.sln.ide
+*.suo
+*.user
+*.userprefs
+*.userconfig
+*.pdb
+*.mdb
+
+# Ignore the test reports
+TestResults/
+*.trx
+
+# Ignore the NUnit XML reports
+*.xml
+
+# Ignore files created by Visual Studio
+*.dbmdl
+*.dbproj.schemaview
+
+# Ignore Rider specific files
+.idea/
+*.sln.iml
+*.sln.ide
+*.idea/
+
+# Ignore backup files
+*.bak
+*.swp
+*.tmp
+*.temp
