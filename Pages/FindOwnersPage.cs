@@ -4,7 +4,6 @@ using myFirstNUnitTest.Utilities;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using NUnit.Framework.Interfaces;
-using System.Security.Cryptography.X509Certificates;
 
 namespace myFirstNUnitTest.Pages
 {
@@ -28,6 +27,13 @@ namespace myFirstNUnitTest.Pages
         private readonly string fldAddressLocator = "(//th[contains(text(),'Address')]/following::td)[1]";
         private readonly string fldCityLocator = "(//th[contains(text(),'City')]/following::td)[1]";
         private readonly string fldTelephoneLocator = "(//th[contains(text(),'Telephone')]/following::td)[1]";
+
+        private readonly string btnEditOwnerLocator = "//a[@class='btn btn-primary' and contains(text(), 'Edit')]";
+        private readonly string btnAddNewPetLocator = "//a[@class='btn btn-primary' and contains(text(), 'Add')]";
+        private readonly string inpPetName = "name";
+        private readonly string inpBirthDate = "birthDate";
+        private readonly string lstType = "type";
+        private readonly string btnAddPet = "//button[@type='submit']";
 
         #endregion Locators
 
@@ -53,6 +59,21 @@ namespace myFirstNUnitTest.Pages
 
         public void CheckOwner(string firstName, string lastName, string address, string city, string phoneNumber)
         {
+            FindOwnerViaLastName(firstName, lastName);
+
+            string fldNameText = elementInteractions.GetText(fldNameLocator);
+            string fldAddressText = elementInteractions.GetText(fldAddressLocator);
+            string fldCityText = elementInteractions.GetText(fldCityLocator);
+            string fldTelephoneText = elementInteractions.GetText(fldTelephoneLocator);
+
+            Assert.That(fldNameText, Is.EqualTo($"{firstName} {lastName}"));
+            Assert.That(fldAddressText, Is.EqualTo(address));
+            Assert.That(fldCityText, Is.EqualTo(city));
+            Assert.That(fldTelephoneText, Is.EqualTo(phoneNumber));
+        }
+
+        public void FindOwnerViaLastName(string firstName, string lastName)
+        {
             elementInteractions.ClickButton(btnScndFindOwnersLocator);
             elementInteractions.FillInput(inpLastNameLocator, lastName);
             elementInteractions.ClickButton(btnFindOwnerLocator);
@@ -65,16 +86,15 @@ namespace myFirstNUnitTest.Pages
             {
                 Console.WriteLine("Element not found; skipping the click action.");
             }
-
-            string fldNameText = elementInteractions.GetText(fldNameLocator);
-            string fldAddressText = elementInteractions.GetText(fldAddressLocator);
-            string fldCityText = elementInteractions.GetText(fldCityLocator);
-            string fldTelephoneText = elementInteractions.GetText(fldTelephoneLocator);
-
-            Assert.That(fldNameText, Is.EqualTo($"{firstName} {lastName}"));
-            Assert.That(fldAddressText, Is.EqualTo(address));
-            Assert.That(fldCityText, Is.EqualTo(city));
-            Assert.That(fldTelephoneText, Is.EqualTo(phoneNumber));
         }
+
+        public void AddPet(string petName, string birthDate, string animalType, string ownerName, string ownerLastname)
+        {
+            FindOwnerViaLastName(ownerName, ownerLastname);
+
+            //TODO: finish method for pet adding
+        }
+
+
     }
 }

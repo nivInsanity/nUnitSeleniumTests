@@ -32,6 +32,7 @@ namespace AddingOwnerTest.TestCases
         [Test]
         public void NunitSeleniumTest()
         {
+            //TODO: Data to other file
             string firstName = "Bartolomeo";
             string lastName = "Chaffinch";
             string address = "Imagined 234/a";

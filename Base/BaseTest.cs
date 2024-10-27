@@ -30,14 +30,14 @@ namespace myFirstNUnitTest.Base
 
         [TearDown]
         public void Teardown()
-        {            
+        {
             Driver?.Quit();
             Driver?.Dispose();
         }
 
         public void Dispose()
         {
-            Teardown(); 
+            Teardown();
         }
     }
 }
