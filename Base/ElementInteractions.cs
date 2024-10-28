@@ -1,5 +1,8 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace myFirstNUnitTest.Utilities
 {
@@ -25,6 +28,12 @@ namespace myFirstNUnitTest.Utilities
             var inputField = FindElement(By.Id(locator));
             inputField.SendKeys(value);
         }
+        
+        public void ClearInput(string locator)
+        {
+            var inputField = FindElement(By.Id(locator));
+            inputField.Clear();
+        }
 
         private IWebElement FindElement(By by)
         {
@@ -40,6 +49,15 @@ namespace myFirstNUnitTest.Utilities
         {
             var elements = driver.FindElements(by);
             return elements.Count > 0;
+        }
+
+        public void SelectFromDropdown(string locator, string lstText)
+        {
+            IWebElement dropdown = driver.FindElement(By.Id(locator));
+
+            SelectElement selectFromDropdown = new SelectElement(dropdown);
+
+            selectFromDropdown.SelectByText(lstText);
         }
     }
 }

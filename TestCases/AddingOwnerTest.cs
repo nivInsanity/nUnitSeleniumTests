@@ -6,6 +6,7 @@ using System;
 using OpenQA.Selenium.Support.UI;
 using myFirstNUnitTest.Base;
 using myFirstNUnitTest.Pages;
+using PetClinicTestAutomation.TestData;
 
 
 namespace AddingOwnerTest.TestCases
@@ -30,21 +31,55 @@ namespace AddingOwnerTest.TestCases
         }
 
         [Test]
-        public void NunitSeleniumTest()
+        [Order(1)]
+        public void AddOwnerTest()
         {
-            //TODO: Data to other file
-            string firstName = "Bartolomeo";
-            string lastName = "Chaffinch";
-            string address = "Imagined 234/a";
-            string city = "New York";
-            string phoneNumber = "1234567890";
 
-            findOwnerPage.AddOwner(firstName, lastName, address, city, phoneNumber);
+            var owner = PeopleData.Bartolomeo;
 
-            findOwnerPage.CheckOwner(firstName, lastName, address, city, phoneNumber);
+            findOwnerPage.AddOwner(owner.firstName,
+                                   owner.lastName,
+                                   owner.address,
+                                   owner.city,
+                                   owner.phoneNumber);
 
-
-
+            findOwnerPage.CheckOwner(owner.firstName,
+                                     owner.lastName,
+                                     owner.address,
+                                     owner.city,
+                                     owner.phoneNumber);
         }
+
+        [Test]
+        [Order(2)]
+        public void AddAnimalTest()
+        {
+            var dog = AnimalData.Dog;
+            var owner = PeopleData.Bartolomeo;
+
+            findOwnerPage.AddPet(dog.name,
+                                 dog.birthDate,
+                                 dog.type,
+                                 owner.firstName,
+                                 owner.lastName);
+        }
+
+        [Test]
+        [Order(3)]
+        public void EditOwnerTest()
+        {
+            var owner = PeopleData.Bartolomeo;
+            var editedOwner = PeopleData.Pedro;
+
+            findOwnerPage.EditOwnerData(owner.firstName,
+                                        owner.lastName,
+                                        editedOwner.firstName,
+                                        editedOwner.lastName,
+                                        editedOwner.address,
+                                        editedOwner.city,
+                                        editedOwner.phoneNumber);
+        //TODO: Assertions for Order 2 and 3
+        }
+
     }
 }

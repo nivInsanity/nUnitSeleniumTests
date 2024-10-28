@@ -33,7 +33,7 @@ namespace myFirstNUnitTest.Pages
         private readonly string inpPetName = "name";
         private readonly string inpBirthDate = "birthDate";
         private readonly string lstType = "type";
-        private readonly string btnAddPet = "//button[@type='submit']";
+        private readonly string btnSubmit = "//button[@type='submit']";
 
         #endregion Locators
 
@@ -47,11 +47,8 @@ namespace myFirstNUnitTest.Pages
             elementInteractions.ClickButton(btnFindOwnersLocator);
             elementInteractions.ClickButton(btnAddOwnerLocator);
 
-            elementInteractions.FillInput(inpAddOwnerLocator, firstName);
-            elementInteractions.FillInput(inpLastNameLocator, lastName);
-            elementInteractions.FillInput(inpAddressLocator, address);
-            elementInteractions.FillInput(inpCityLocator, city);
-            elementInteractions.FillInput(inpTelephoneLocator, phoneNumber);
+            FillOwnerData(firstName, lastName, address, city, phoneNumber);
+
 
             elementInteractions.ClickButton(btnScndAddOwnerLocator);         
 
@@ -92,9 +89,47 @@ namespace myFirstNUnitTest.Pages
         {
             FindOwnerViaLastName(ownerName, ownerLastname);
 
-            //TODO: finish method for pet adding
+            elementInteractions.ClickButton(btnAddNewPetLocator);
+            
+            elementInteractions.FillInput(inpPetName, petName);
+            elementInteractions.FillInput(inpBirthDate, birthDate);
+
+            elementInteractions.SelectFromDropdown(lstType, animalType);
+
+            elementInteractions.ClickButton(btnSubmit);
+
         }
 
+        public void FillOwnerData(string firstName, string lastName, string address, string city, string phoneNumber)
+        {
+            elementInteractions.FillInput(inpAddOwnerLocator, firstName);
+            elementInteractions.FillInput(inpLastNameLocator, lastName);
+            elementInteractions.FillInput(inpAddressLocator, address);
+            elementInteractions.FillInput(inpCityLocator, city);
+            elementInteractions.FillInput(inpTelephoneLocator, phoneNumber);
+        }
+
+        public void ClearOwnerData()
+        {
+            elementInteractions.ClearInput(inpAddOwnerLocator);
+            elementInteractions.ClearInput(inpLastNameLocator);
+            elementInteractions.ClearInput(inpAddressLocator);
+            elementInteractions.ClearInput(inpCityLocator);
+            elementInteractions.ClearInput(inpTelephoneLocator);
+        }
+        public void EditOwnerData(string firstName, string lastName, string firstNameEdited, string lastNameEdited, string address, string city, string phoneNumber)
+        {
+            FindOwnerViaLastName(firstName, lastName);
+
+            elementInteractions.ClickButton(btnEditOwnerLocator);
+
+            ClearOwnerData();
+
+            FillOwnerData(firstNameEdited, lastNameEdited, address, city, phoneNumber);
+
+            elementInteractions.ClickButton(btnSubmit);
+            
+        }
 
     }
 }
