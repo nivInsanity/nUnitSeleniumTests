@@ -1,9 +1,3 @@
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System.IO;
-using System;
-using OpenQA.Selenium.Support.UI;
 using myFirstNUnitTest.Base;
 using myFirstNUnitTest.Pages;
 using PetClinicTestAutomation.TestData;
@@ -58,7 +52,7 @@ namespace AddingOwnerTest.TestCases {
                                  owner.lastName);
 
             findOwnerPage.CheckPet(dog.name,
-                                   dog.birthDate,
+                                   dog.birthDateFromPetsAndVisits,
                                    dog.type,
                                    owner.firstName,
                                    owner.lastName);

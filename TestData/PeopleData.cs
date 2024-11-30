@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PetClinicTestAutomation.TestData {
+﻿namespace PetClinicTestAutomation.TestData {
     public class Owner {
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -15,6 +9,7 @@ namespace PetClinicTestAutomation.TestData {
     public class Animal {
         public string name { get; set; }
         public string birthDate { get; set; }
+        public string birthDateFromPetsAndVisits { get; set; }
         public string type { get; set; }
     }
     public static class PeopleData {
@@ -38,7 +33,9 @@ namespace PetClinicTestAutomation.TestData {
     public static class AnimalData {
         public static Animal Dog { get; } = new Animal {
             name = "Puffy",
-            birthDate = "2020-02-25",
+            birthDate = "25.02.2020",
+            //On adding and editing page date format is dd.mm.yyyy, but on Pets and Visits it's yyyy-mm-dd
+            birthDateFromPetsAndVisits = "2020-02-25",
             type = "dog"
         };
     }

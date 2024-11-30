@@ -1,9 +1,6 @@
 ﻿using OpenQA.Selenium;
-using myFirstNUnitTest.Base;
 using myFirstNUnitTest.Utilities;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
-using NUnit.Framework.Interfaces;
+
 
 namespace myFirstNUnitTest.Pages {
     public class FindOwnersPage {
