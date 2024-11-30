@@ -5,10 +5,8 @@ using NUnit.Framework;
 using NUnit.Framework.Internal;
 using NUnit.Framework.Interfaces;
 
-namespace myFirstNUnitTest.Pages
-{
-    public class FindOwnersPage
-    {
+namespace myFirstNUnitTest.Pages {
+    public class FindOwnersPage {
         private readonly ElementInteractions elementInteractions;
 
         #region Locators
@@ -33,29 +31,32 @@ namespace myFirstNUnitTest.Pages
         private readonly string inpPetName = "name";
         private readonly string inpBirthDate = "birthDate";
         private readonly string lstType = "type";
-        private readonly string btnSubmit = "//button[@type='submit']";
+        private readonly string btnSubmit = "//button[@type='submit']";               
+        private string petsAndVisitsListData(string fieldData) {
+            //To get data of another pet index is n+3, so for the second animal it will be [4], for third [7] etc.
+            //TODO: Build another locator for owners with more than one animal
+
+            string petsAndVisitsListDataLocator = $"(//dl/dt[contains(text(),'{fieldData}')]/following::dd)[1]";
+
+            return petsAndVisitsListDataLocator;
+        }
 
         #endregion Locators
 
-        public FindOwnersPage(IWebDriver driver)
-        {
+        public FindOwnersPage(IWebDriver driver) {
             this.elementInteractions = new ElementInteractions(driver);
         }
 
-        public void AddOwner(string firstName, string lastName, string address, string city, string phoneNumber)
-        {
+        public void AddOwner(string firstName, string lastName, string address, string city, string phoneNumber) {
             elementInteractions.ClickButton(btnFindOwnersLocator);
             elementInteractions.ClickButton(btnAddOwnerLocator);
 
             FillOwnerData(firstName, lastName, address, city, phoneNumber);
 
-
-            elementInteractions.ClickButton(btnScndAddOwnerLocator);         
-
+            elementInteractions.ClickButton(btnScndAddOwnerLocator);       
         }
 
-        public void CheckOwner(string firstName, string lastName, string address, string city, string phoneNumber)
-        {
+        public void CheckOwner(string firstName, string lastName, string address, string city, string phoneNumber) {
             FindOwnerViaLastName(firstName, lastName);
 
             string fldNameText = elementInteractions.GetText(fldNameLocator);
@@ -69,8 +70,20 @@ namespace myFirstNUnitTest.Pages
             Assert.That(fldTelephoneText, Is.EqualTo(phoneNumber));
         }
 
-        public void FindOwnerViaLastName(string firstName, string lastName)
-        {
+        public void CheckPet(string petName, string birthDate, string animalType, string ownerName, string ownerLastname) {
+            
+            FindOwnerViaLastName(ownerName, ownerLastname);
+
+            string fldPetNameText = elementInteractions.GetText(petsAndVisitsListData("Name").ToString());
+            string fldPetbirthDate = elementInteractions.GetText(petsAndVisitsListData("Birth Date").ToString());
+            string fldAnimalType = elementInteractions.GetText(petsAndVisitsListData("Type").ToString());
+
+            Assert.That(fldPetNameText, Is.EqualTo(petName));
+            Assert.That(fldPetbirthDate, Is.EqualTo(birthDate));
+            Assert.That(fldAnimalType, Is.EqualTo(animalType));
+        }
+
+        public void FindOwnerViaLastName(string firstName, string lastName) {
             elementInteractions.ClickButton(btnScndFindOwnersLocator);
             elementInteractions.FillInput(inpLastNameLocator, lastName);
             elementInteractions.ClickButton(btnFindOwnerLocator);
@@ -85,8 +98,7 @@ namespace myFirstNUnitTest.Pages
             }
         }
 
-        public void AddPet(string petName, string birthDate, string animalType, string ownerName, string ownerLastname)
-        {
+        public void AddPet(string petName, string birthDate, string animalType, string ownerName, string ownerLastname) {
             FindOwnerViaLastName(ownerName, ownerLastname);
 
             elementInteractions.ClickButton(btnAddNewPetLocator);
@@ -96,12 +108,9 @@ namespace myFirstNUnitTest.Pages
 
             elementInteractions.SelectFromDropdown(lstType, animalType);
 
-            elementInteractions.ClickButton(btnSubmit);
+            elementInteractions.ClickButton(btnSubmit);        }
 
-        }
-
-        public void FillOwnerData(string firstName, string lastName, string address, string city, string phoneNumber)
-        {
+        public void FillOwnerData(string firstName, string lastName, string address, string city, string phoneNumber) {
             elementInteractions.FillInput(inpAddOwnerLocator, firstName);
             elementInteractions.FillInput(inpLastNameLocator, lastName);
             elementInteractions.FillInput(inpAddressLocator, address);
@@ -109,16 +118,14 @@ namespace myFirstNUnitTest.Pages
             elementInteractions.FillInput(inpTelephoneLocator, phoneNumber);
         }
 
-        public void ClearOwnerData()
-        {
+        public void ClearOwnerData() {
             elementInteractions.ClearInput(inpAddOwnerLocator);
             elementInteractions.ClearInput(inpLastNameLocator);
             elementInteractions.ClearInput(inpAddressLocator);
             elementInteractions.ClearInput(inpCityLocator);
             elementInteractions.ClearInput(inpTelephoneLocator);
         }
-        public void EditOwnerData(string firstName, string lastName, string firstNameEdited, string lastNameEdited, string address, string city, string phoneNumber)
-        {
+        public void EditOwnerData(string firstName, string lastName, string firstNameEdited, string lastNameEdited, string address, string city, string phoneNumber) {
             FindOwnerViaLastName(firstName, lastName);
 
             elementInteractions.ClickButton(btnEditOwnerLocator);
@@ -127,9 +134,7 @@ namespace myFirstNUnitTest.Pages
 
             FillOwnerData(firstNameEdited, lastNameEdited, address, city, phoneNumber);
 
-            elementInteractions.ClickButton(btnSubmit);
-            
+            elementInteractions.ClickButton(btnSubmit);            
         }
-
     }
 }

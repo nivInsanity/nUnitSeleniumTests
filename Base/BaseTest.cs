@@ -5,15 +5,12 @@ using NUnit.Framework;
 using System;
 using System.IO;
 
-namespace myFirstNUnitTest.Base
-{
-    public class BaseTest
-    {
+namespace myFirstNUnitTest.Base {
+    public class BaseTest {
         protected IWebDriver Driver { get; private set; }
 
         [SetUp]
-        public void Setup()
-        {
+        public void Setup() {
 
             string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\"));
             Driver = new ChromeDriver(path + "\\drivers");
@@ -29,14 +26,12 @@ namespace myFirstNUnitTest.Base
         }
 
         [TearDown]
-        public void Teardown()
-        {
+        public void Teardown() {
             Driver?.Quit();
             Driver?.Dispose();
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             Teardown();
         }
     }

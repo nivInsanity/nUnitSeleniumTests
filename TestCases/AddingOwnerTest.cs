@@ -9,31 +9,26 @@ using myFirstNUnitTest.Pages;
 using PetClinicTestAutomation.TestData;
 
 
-namespace AddingOwnerTest.TestCases
-{
+namespace AddingOwnerTest.TestCases {
 
     [TestFixture]
-    public class AddingOwnerTest : BaseTest
-    {
+    public class AddingOwnerTest : BaseTest {
         private FindOwnersPage findOwnerPage;
 
 
         [SetUp]
-        public new void Setup()
-        {
+        public new void Setup() {
             findOwnerPage = new FindOwnersPage(Driver);
         }
 
         [TearDown]
-        public new void Teardown()
-        {
+        public new void Teardown() {
             base.Teardown();
         }
 
         [Test]
         [Order(1)]
-        public void AddOwnerTest()
-        {
+        public void AddOwnerTest() {
 
             var owner = PeopleData.Bartolomeo;
 
@@ -52,8 +47,7 @@ namespace AddingOwnerTest.TestCases
 
         [Test]
         [Order(2)]
-        public void AddAnimalTest()
-        {
+        public void AddAnimalTest() {
             var dog = AnimalData.Dog;
             var owner = PeopleData.Bartolomeo;
 
@@ -62,12 +56,17 @@ namespace AddingOwnerTest.TestCases
                                  dog.type,
                                  owner.firstName,
                                  owner.lastName);
+
+            findOwnerPage.CheckPet(dog.name,
+                                   dog.birthDate,
+                                   dog.type,
+                                   owner.firstName,
+                                   owner.lastName);
         }
 
         [Test]
         [Order(3)]
-        public void EditOwnerTest()
-        {
+        public void EditOwnerTest() {
             var owner = PeopleData.Bartolomeo;
             var editedOwner = PeopleData.Pedro;
 
@@ -78,8 +77,12 @@ namespace AddingOwnerTest.TestCases
                                         editedOwner.address,
                                         editedOwner.city,
                                         editedOwner.phoneNumber);
-        //TODO: Assertions for Order 2 and 3
-        }
 
+            findOwnerPage.CheckOwner(editedOwner.firstName,
+                                     editedOwner.lastName,
+                                     editedOwner.address,
+                                     editedOwner.city,
+                                     editedOwner.phoneNumber);
+        }
     }
 }
