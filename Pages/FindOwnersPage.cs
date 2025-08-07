@@ -1,8 +1,8 @@
 ﻿using OpenQA.Selenium;
-using myFirstNUnitTest.Utilities;
+using PetClinicTestAutomation.Base;
 
 
-namespace myFirstNUnitTest.Pages {
+namespace PetClinicTestAutomation.Pages {
     public class FindOwnersPage {
         private readonly ElementInteractions elementInteractions;
 

@@ -1,17 +1,21 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 
-namespace myFirstNUnitTest.Base {
+namespace PetClinicTestAutomation.Base {
     public class BaseTest {
         protected IWebDriver Driver { get; private set; }
 
         [SetUp]
-        public void Setup() {
+        public virtual void Setup() {
 
+            var options = new FirefoxOptions();
+            options.BinaryLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            
             string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\"));
-            Driver = new ChromeDriver(path + "\\drivers");
+            Driver = new FirefoxDriver(path + "\\drivers", options);
             Driver.Manage().Window.Maximize();
             Driver.Url = "http://localhost:8080/";
 

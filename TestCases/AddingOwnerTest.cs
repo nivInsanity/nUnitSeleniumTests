@@ -1,9 +1,9 @@
-using myFirstNUnitTest.Base;
-using myFirstNUnitTest.Pages;
+using PetClinicTestAutomation.Base;
+using PetClinicTestAutomation.Pages;
 using PetClinicTestAutomation.TestData;
 
 
-namespace AddingOwnerTest.TestCases {
+namespace PetClinicTestAutomation.TestCases {
 
     [TestFixture]
     public class AddingOwnerTest : BaseTest {
@@ -11,7 +11,8 @@ namespace AddingOwnerTest.TestCases {
 
 
         [SetUp]
-        public new void Setup() {
+        public override void Setup() {
+            base.Setup();
             findOwnerPage = new FindOwnersPage(Driver);
         }
 

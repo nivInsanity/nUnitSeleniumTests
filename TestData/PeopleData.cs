@@ -33,9 +33,9 @@
     public static class AnimalData {
         public static Animal Dog { get; } = new Animal {
             name = "Puffy",
-            birthDate = "25.02.2020",
+            birthDate = "2020-02-02",
             //On adding and editing page date format is dd.mm.yyyy, but on Pets and Visits it's yyyy-mm-dd
-            birthDateFromPetsAndVisits = "2020-02-25",
+            birthDateFromPetsAndVisits = "2020-02-02",
             type = "dog"
         };
     }

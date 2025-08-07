@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 
 
-namespace myFirstNUnitTest.Utilities {
+namespace PetClinicTestAutomation.Base {
     public class ElementInteractions {
         private readonly IWebDriver driver;
         private readonly WebDriverWait wait;
