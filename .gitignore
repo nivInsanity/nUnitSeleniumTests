@@ -90,3 +90,6 @@ TestResults/
 *.swp
 *.tmp
 *.temp
+
+# Ignore drivers
+.drivers/
