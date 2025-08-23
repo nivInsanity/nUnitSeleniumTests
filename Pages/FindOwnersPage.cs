@@ -40,6 +40,8 @@ namespace PetClinicTestAutomation.Pages {
 
         #endregion Locators
 
+        #region Methods
+        
         public FindOwnersPage(IWebDriver driver) {
             this.elementInteractions = new ElementInteractions(driver);
         }
@@ -133,5 +135,7 @@ namespace PetClinicTestAutomation.Pages {
 
             elementInteractions.ClickButton(btnSubmit);            
         }
+        
+        #endregion
     }
 }

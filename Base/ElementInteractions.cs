@@ -47,5 +47,11 @@ namespace PetClinicTestAutomation.Base {
 
             selectFromDropdown.SelectByText(lstText);
         }
+
+        public int FindElements(By by)
+        {
+            var elements = driver.FindElements(by);
+            return elements.Count;
+        }
     }
 }
