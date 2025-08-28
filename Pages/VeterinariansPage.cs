@@ -36,7 +36,7 @@ public class VeterinariansPage
         string theadSpecialityText = elementInteractions.GetText($"({theadLocator})[2]");
 
         Assert.That(theadNameText, Is.EqualTo("Name"));
-        Assert.That(theadSpecialityText, Is.EqualTo("Speciality"));
+        Assert.That(theadSpecialityText, Is.EqualTo("Specialties"));
     }
     
     #endregion
