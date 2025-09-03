@@ -79,5 +79,13 @@ namespace PetClinicTestAutomation.TestCases {
                                      editedOwner.city,
                                      editedOwner.phoneNumber);
         }
+
+        [Test]
+        [Order(4)]
+        public void FindOwnerTest()
+        {
+            var owner = PeopleData.Pedro;
+            findOwnerPage.FindOwnerViaLastNameAndCheckData("Pedro", "Pascal");
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace PetClinicTestAutomation.Pages {
         private readonly string inpBirthDate = "birthDate";
         private readonly string lstType = "type";
         private readonly string btnSubmit = "//button[@type='submit']";               
-        private string petsAndVisitsListData(string fieldData) {
+        private string PetsAndVisitsListData(string fieldData) {
             //To get data of another pet index is n+3, so for the second animal it will be [4], for third [7] etc.
             //TODO: Build another locator for owners with more than one animal
 
@@ -56,7 +56,7 @@ namespace PetClinicTestAutomation.Pages {
         }
 
         public void CheckOwner(string firstName, string lastName, string address, string city, string phoneNumber) {
-            FindOwnerViaLastName(firstName, lastName);
+            FindOwnerViaLastNameAndCheckData(firstName, lastName);
 
             string fldNameText = elementInteractions.GetText(fldNameLocator);
             string fldAddressText = elementInteractions.GetText(fldAddressLocator);
@@ -71,18 +71,18 @@ namespace PetClinicTestAutomation.Pages {
 
         public void CheckPet(string petName, string birthDate, string animalType, string ownerName, string ownerLastname) {
             
-            FindOwnerViaLastName(ownerName, ownerLastname);
+            FindOwnerViaLastNameAndCheckData(ownerName, ownerLastname);
 
-            string fldPetNameText = elementInteractions.GetText(petsAndVisitsListData("Name").ToString());
-            string fldPetbirthDate = elementInteractions.GetText(petsAndVisitsListData("Birth Date").ToString());
-            string fldAnimalType = elementInteractions.GetText(petsAndVisitsListData("Type").ToString());
+            string fldPetNameText = elementInteractions.GetText(PetsAndVisitsListData("Name"));
+            string fldPetbirthDate = elementInteractions.GetText(PetsAndVisitsListData("Birth Date"));
+            string fldAnimalType = elementInteractions.GetText(PetsAndVisitsListData("Type"));
 
             Assert.That(fldPetNameText, Is.EqualTo(petName));
             Assert.That(fldPetbirthDate, Is.EqualTo(birthDate));
             Assert.That(fldAnimalType, Is.EqualTo(animalType));
         }
 
-        public void FindOwnerViaLastName(string firstName, string lastName) {
+        public void FindOwnerViaLastNameAndCheckData(string firstName, string lastName) {
             elementInteractions.ClickButton(btnScndFindOwnersLocator);
             elementInteractions.FillInput(inpLastNameLocator, lastName);
             elementInteractions.ClickButton(btnFindOwnerLocator);
@@ -98,7 +98,7 @@ namespace PetClinicTestAutomation.Pages {
         }
 
         public void AddPet(string petName, string birthDate, string animalType, string ownerName, string ownerLastname) {
-            FindOwnerViaLastName(ownerName, ownerLastname);
+            FindOwnerViaLastNameAndCheckData(ownerName, ownerLastname);
 
             elementInteractions.ClickButton(btnAddNewPetLocator);
             
@@ -125,7 +125,7 @@ namespace PetClinicTestAutomation.Pages {
             elementInteractions.ClearInput(inpTelephoneLocator);
         }
         public void EditOwnerData(string firstName, string lastName, string firstNameEdited, string lastNameEdited, string address, string city, string phoneNumber) {
-            FindOwnerViaLastName(firstName, lastName);
+            FindOwnerViaLastNameAndCheckData(firstName, lastName);
 
             elementInteractions.ClickButton(btnEditOwnerLocator);
 
@@ -136,6 +136,5 @@ namespace PetClinicTestAutomation.Pages {
             elementInteractions.ClickButton(btnSubmit);            
         }
         
-        #endregion
     }
 }
