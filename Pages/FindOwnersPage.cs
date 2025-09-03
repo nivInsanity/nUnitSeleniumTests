@@ -135,6 +135,7 @@ namespace PetClinicTestAutomation.Pages {
 
             elementInteractions.ClickButton(btnSubmit);            
         }
-        
+
+        #endregion
     }
 }
